@@ -10,12 +10,13 @@
     android:paddingTop="16dp"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    <!--
-    <Button
+
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn"
-        android:text="Agregar persona"/>-->
+        android:id="@+id/btnIr"
+        android:text="Ir"/>-->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"

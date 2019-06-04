@@ -1,21 +1,27 @@
 package com.example.alumno.clase5;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
 public class MyListener implements View.OnClickListener {
-    MainActivity mainActivity;
-    public  MyListener(MainActivity mainActivity){
-        this.mainActivity = mainActivity;
+    Activity activity;
+    public  MyListener(Activity activity){
+        this.activity = activity;
     }
 
     @Override
     public void onClick(View view) {
-        Log.d("Click","algo");
+
+        /*if(view.getId() == R.id.btnBack) {
+            this.activity.finish();
+            Log.d("if", "if");
+        } else {*/
+            Log.d("elseif", "elseif");
+        //}
 
         //mainActivity.personas.add(new PersonaModel("Cosme","Fulanito","6685-4798"));
         //mainActivity.adapter.notifyDataSetChanged();
-        //mainActivity.personas.get(0).setApellido("lakjsdklashdalñk");
-        //mainActivity.adapter.notifyItemChanged(0);
     }
 }
