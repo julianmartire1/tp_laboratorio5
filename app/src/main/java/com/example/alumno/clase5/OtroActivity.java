@@ -25,7 +25,7 @@ public class OtroActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(i.getStringExtra("title"));
 
-        MyListener listener = new MyListener(this);
+        //MyListener listener = new MyListener(this);
         /*Button btn = (Button) super.findViewById(R.id.btnBack);
         btn.setOnClickListener(listener);*/
 
@@ -33,6 +33,8 @@ public class OtroActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
 
         webSettings.setJavaScriptEnabled(true);
+
+        Log.d("URL",i.getStringExtra("url"));
 
         webView.loadUrl(i.getStringExtra("url"));
 

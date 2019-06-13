@@ -72,4 +72,9 @@ public class ItemModel {
                 ", procesar=" + procesar +
                 '}';
     }
+
+    public String obetenerFuente() {
+        String url = getLink();
+        return url.split("//")[1].split("/")[0];
+    }
 }

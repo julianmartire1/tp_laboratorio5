@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
     MyAdapter adapter;
     List<ItemModel> items;
     List<ItemModel> otherItems;
+
+    Handler handler;
+
     public static final int TEXTO = 1;
     public static final int IMAGEN = 2;
     @Override
@@ -28,10 +31,9 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyListener listener = new MyListener(this);
-
         this.items = new ArrayList<>();
         this.otherItems = new ArrayList<>();
+        this.handler = new Handler(this);
 
         RecyclerView rvPersona = (RecyclerView) super.findViewById(R.id.rvItems);
 
@@ -43,8 +45,28 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
         adapter = new MyAdapter(items,this,handler);
         rvPersona.setAdapter(adapter);
 
-        MyThread hilo = new MyThread(handler,"https://tn.com.ar/rss.xml",TEXTO,0);
-        hilo.start();
+        /*MyThread hilo = new MyThread(handler,"https://tn.com.ar/rss.xml",TEXTO,0);
+        hilo.start();*/
+
+        Catalog catalogo = new Catalog(this);
+        catalogo.show(getSupportFragmentManager(),"dialogo");
+    }
+
+    public void Cargar(List<String> urls){
+
+        Log.d("urls", urls.toString());
+        this.items = new ArrayList<ItemModel>();
+        this.otherItems = new ArrayList<ItemModel>();
+
+        adapter.items = new ArrayList<ItemModel>();
+        adapter.notifyDataSetChanged();
+
+        for(String url: urls){
+            MyThread hilo = new MyThread(handler,url,TEXTO,0);
+            hilo.start();
+        }
+        //MyThread hilo = new MyThread(handler,url,TEXTO,0);
+        //hilo.start();
     }
 
     @Override
@@ -62,12 +84,12 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
     @Override
     public boolean handleMessage(Message msg) {
         if(msg.arg1 == TEXTO){
-            this.items = this.adapter.SetPersonas((List<ItemModel>) msg.obj);
+            this.items = this.adapter.setItems((List<ItemModel>) msg.obj, false);
             this.otherItems = (List<ItemModel>) msg.obj;
             adapter.notifyDataSetChanged();
         }
         else{
-            this.adapter.SetImagenPer((byte[])msg.obj,msg.arg2);
+            this.adapter.setImagenItem((byte[])msg.obj,msg.arg2);
             adapter.notifyItemChanged(msg.arg2);
             //ImageView imagen = (ImageView)super.findViewById(R.id.imagen);
             //imagen.setImageBitmap(BitmapFactory.decodeByteArray((byte[])msg.obj,0,((byte[]) msg.obj).length));
@@ -86,15 +108,15 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.op1) {
-            Log.d("Opcion", "1");
+        if(item.getItemId() == R.id.showDialog) {
+            /*MyDialog dialog = new MyDialog();
+            dialog.show(getSupportFragmentManager(), "dialog");*/
+
+            Catalog catalogo = new Catalog(this);
+            catalogo.show(getSupportFragmentManager(),"dialogo");
         } else {
-            if(item.getItemId() == R.id.op2) {
-                Log.d("Opcion", "2");
-            } else {
-                if(item.getItemId() == android.R.id.home) {
-                    this.finish();
-                }
+            if(item.getItemId() == android.R.id.home) {
+                this.finish();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -111,12 +133,12 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
         Log.d("Escribo",newText);
         if(newText.length() >= 2) {
             this.filtrar(newText);
-            adapter.SetPersonas(this.items);
+            adapter.setItems(this.items, true);
             adapter.notifyDataSetChanged();
         }
         else{
             this.items = this.otherItems;
-            adapter.SetPersonas(this.otherItems);
+            adapter.setItems(this.otherItems, true);
             adapter.notifyDataSetChanged();
         }
         return false;

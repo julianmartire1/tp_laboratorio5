@@ -34,8 +34,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ItemModel i = this.items.get(position);
 
         holder.tvTitle.setText(i.getTitle());
-        holder.tvDescription.setText(i.getDescription());
-        holder.tvLink.setText(i.getLink());
+        holder.tvDescription.setText(i.getDescription().replace("/n", ""));
+        holder.tvLink.setText(i.obetenerFuente());
 
         if(!i.getProcesar()){
             MyThread hilo2 = new MyThread(this.myHanler,i.getImage(),2,position);
@@ -51,13 +51,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.setPosition(position);
     }
 
-    public List<ItemModel> SetPersonas(List<ItemModel> pers){
-        this.items = pers;
+    public List<ItemModel> setItems(List<ItemModel> items, boolean update){
+        if(update)
+            this.items = items;
+        else{
+            for(ItemModel item: items){
+                this.items.add(item);
+            }
+        }
         return this.items;
     }
-    public void SetImagenPer(byte[] imagen,int position){
-        ItemModel p = this.items.get(position);
-        p.setImagenValor(imagen);
+    public void setImagenItem(byte[] imagen,int position){
+        ItemModel i = this.items.get(position);
+        i.setImagenValor(imagen);
     }
     @Override
     public int getItemCount() {

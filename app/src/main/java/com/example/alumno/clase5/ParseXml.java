@@ -61,6 +61,12 @@ public class ParseXml {
                             i.setImage(image);
                         }
                     }
+                    if ("enclosure".equals(xml.getName())) {
+                        if(i != null) {
+                            String image = xml.getAttributeValue(null,"url");
+                            i.setImage(image);
+                        }
+                    }
                 } else if(event == XmlPullParser.END_TAG && "item".equals(xml.getName())) {
                     ListaItem.add(i);
                 }
