@@ -10,14 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="4dp"
+        android:layout_marginBottom="5dp"
         android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorCard">
             <ImageView
-                android:src="@drawable/avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/viewImage"
@@ -34,13 +35,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorBlack"/>
+                    android:textColor="@color/colorText"/>
                 <TextView
                     android:id="@+id/tvDescription"
                     android:text="Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorDescription"/>
                 <TextView
                     android:textStyle="italic"
                     android:id="@+id/tvLink"
@@ -48,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorAccent"
                     android:gravity="end"/>
             </LinearLayout>
         </LinearLayout>

@@ -51,6 +51,8 @@ public class MyListener implements View.OnClickListener, Dialog.OnClickListener 
                         urls.add("https://tn.com.ar/rss.xml");
                     } else if(ch.getId() == R.id.CL1){
                         urls.add("https://www.clarin.com/rss/lo-ultimo/");
+                    } else if(ch.getId() == R.id.P12) {
+                        urls.add("https://www.pagina12.com.ar/rss/portada");
                     }
                     editor.putBoolean((String)ch.getText(),ch.isChecked());
                 }

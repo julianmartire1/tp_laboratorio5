@@ -6,6 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- To change the popup menu and app text color  -->
+        <item name="android:textColor">@color/colorText</item>
+
+        <!-- To change the background of options menu-->
+        <item name="android:itemBackground">@color/colorCard</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--item RadioButton or CheckBox color-->
+        <item name="colorControlNormal">@android:color/white</item>
+        <!--buttons color-->
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:background">@color/colorCard</item>
+    </style>
 </resources>

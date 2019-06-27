@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -31,17 +32,21 @@ public class Catalog extends DialogFragment {
         View v = li.inflate(R.layout.my_dialog,null);
         CheckBox TN1 = (CheckBox) v.findViewById(R.id.TN1);
         CheckBox CL1 = (CheckBox) v.findViewById(R.id.CL1);
+        CheckBox P12 = (CheckBox) v.findViewById(R.id.P12);
         List<CheckBox> opciones = new ArrayList<>();
 
         SharedPreferences prefs = this.activity.getSharedPreferences("catalogo", Context.MODE_MULTI_PROCESS);
 
         TN1.setChecked(prefs.getBoolean((String)TN1.getText(),false));
         CL1.setChecked(prefs.getBoolean((String)CL1.getText(),false));
+        P12.setChecked(prefs.getBoolean((String)P12.getText(),false));
 
         opciones.add(TN1);
         opciones.add(CL1);
+        opciones.add(P12);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom));
         builder.setTitle("Portales");
         MyListener ml = new MyListener(this.activity,opciones);
 

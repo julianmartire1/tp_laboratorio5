@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ItemModel i = this.items.get(position);
 
         holder.tvTitle.setText(i.getTitle());
-        holder.tvDescription.setText(i.getDescription().replace("/n", ""));
+        holder.tvDescription.setText(i.getDescription());
         holder.tvLink.setText(i.obetenerFuente());
 
         if(!i.getProcesar()){
