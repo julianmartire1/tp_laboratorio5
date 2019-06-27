@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements MyOnItemClick, Ha
     public boolean handleMessage(Message msg) {
         if(msg.arg1 == TEXTO){
             this.items = this.adapter.setItems((List<ItemModel>) msg.obj, false);
-            this.otherItems = (List<ItemModel>) msg.obj;
             adapter.notifyDataSetChanged();
+            this.otherItems = this.items;
         }
         else{
             this.adapter.setImagenItem((byte[])msg.obj,msg.arg2);
